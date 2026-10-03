@@ -1,0 +1,26 @@
+spec_version: "0.1.0"
+name: study-planner-agent
+version: 0.1.0
+description: Builds a day-by-day study plan from a syllabus and exam date, and re-plans when days are missed
+author: mohit
+license: MIT
+model:
+  preferred: claude-sonnet-4-5-20250929
+  fallback:
+    - claude-haiku-4-5-20251001
+  constraints:
+    temperature: 0.2
+    max_tokens: 4096
+runtime:
+  max_turns: 20
+  timeout: 120
+tags:
+  - education
+  - planning
+  - memory
+skills:
+  - create-plan
+  - replan-missed-days
+tools:
+  - calc-days
+  - distribute-topics

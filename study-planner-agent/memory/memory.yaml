@@ -1,0 +1,22 @@
+layers:
+  - name: index
+    path: MEMORY.md
+    max_lines: 20
+    format: markdown
+
+  - name: context
+    path: context.md
+    max_lines: 100
+    format: markdown
+    load: always
+
+  - name: progress-log
+    path: daily-log/
+    format: markdown
+    load: latest
+    retention: 90d
+    rotation: daily
+
+update_triggers:
+  - on_session_end
+  - on_explicit_save

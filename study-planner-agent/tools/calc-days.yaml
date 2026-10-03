@@ -1,0 +1,29 @@
+name: calc-days
+description: Count the days left before an exam and split them into study days and revision days
+version: 1.0.0
+input_schema:
+  type: object
+  properties:
+    today: { type: string, description: "YYYY-MM-DD" }
+    exam_date: { type: string, description: "YYYY-MM-DD" }
+    revision_pct: { type: integer, description: "Percent of days reserved for revision (default 20)" }
+    skip_dates:
+      type: array
+      items: { type: string }
+      description: Dates the student cannot study
+  required: [today, exam_date]
+output_schema:
+  type: object
+  properties:
+    days_left: { type: integer }
+    study_dates: { type: array, items: { type: string } }
+    revision_dates: { type: array, items: { type: string } }
+implementation:
+  type: script
+  path: calc_days.py
+  runtime: python3
+  timeout: 10
+annotations:
+  requires_confirmation: false
+  read_only: true
+  cost: none

@@ -1,0 +1,41 @@
+name: distribute-topics
+description: Spread topic hours across study days within the daily hour limit, skipping completed topics, and report anything that does not fit
+version: 1.0.0
+input_schema:
+  type: object
+  properties:
+    topics:
+      type: array
+      items:
+        type: object
+        properties:
+          name: { type: string }
+          hours: { type: number }
+        required: [name, hours]
+    study_dates: { type: array, items: { type: string } }
+    hours_per_day: { type: number }
+    completed: { type: array, items: { type: string }, description: Topic names already finished }
+  required: [topics, study_dates, hours_per_day]
+output_schema:
+  type: object
+  properties:
+    schedule:
+      type: array
+      items:
+        type: object
+        properties:
+          date: { type: string }
+          topic: { type: string }
+          hours: { type: number }
+          status: { type: string }
+    unscheduled: { type: array, items: { type: object } }
+    fits: { type: boolean }
+implementation:
+  type: script
+  path: distribute_topics.py
+  runtime: python3
+  timeout: 10
+annotations:
+  requires_confirmation: false
+  read_only: true
+  cost: none

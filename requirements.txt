@@ -1,0 +1,2 @@
+crewai[anthropic]==1.15.23
+PyYAML==6.0.3
